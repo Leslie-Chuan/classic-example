@@ -21,7 +21,7 @@ const server = new Server(
 );
 
 // ── Tool 定义 ──────────────────────────────
-
+// MCP的协议决定：先声明工具和能力，让 LLM 知道可用的工具
 server.setRequestHandler(ListToolsRequestSchema, async () => ({
   tools: [
     {
@@ -52,6 +52,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => ({
   ],
 }));
 
+// LLM调用时具体实现工具功能
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
   const { name, arguments: args } = request.params;
 

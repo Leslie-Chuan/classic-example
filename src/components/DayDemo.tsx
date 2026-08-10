@@ -3,10 +3,12 @@
 import dynamic from "next/dynamic";
 
 const MCPPlayground = dynamic(() => import("./MCPPlayground"), { ssr: false });
+const Day2MCPPlayground = dynamic(() => import("./Day2MCPPlayground"), { ssr: false });
 
 // Day 编号 → 对应的交互 Demo 组件
 const DEMO_MAP: Record<number, React.ComponentType> = {
   1: MCPPlayground,
+  2: Day2MCPPlayground,
 };
 
 interface Props {
