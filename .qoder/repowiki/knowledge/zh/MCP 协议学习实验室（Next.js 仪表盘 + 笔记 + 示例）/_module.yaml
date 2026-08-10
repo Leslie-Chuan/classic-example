@@ -1,6 +1,6 @@
 schema_version: 1
 module_path: ""
-title: AI 前端每日学习计划仓库
+title: MCP 协议学习实验室（Next.js 仪表盘 + 笔记 + 示例）
 scope:
     - README.md
     - .gitignore

@@ -1,6 +1,6 @@
 schema_version: 1
 module_path: app
-title: AI 前端每日学习计划仪表盘
+title: AI 前端每日学习仪表盘（Next.js App Router）
 scope:
     - src/
 source_files: []

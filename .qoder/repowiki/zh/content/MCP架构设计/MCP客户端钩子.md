@@ -8,6 +8,13 @@
 - [package.json](file://package.json)
 </cite>
 
+## 更新摘要
+**变更内容**
+- 新增 useMCPTool 自定义钩子的完整实现，包含75行核心MCP工具集成逻辑
+- 增强了现有客户端钩子架构，提供统一的MCP工具调用接口
+- 添加了完整的状态管理、异步请求处理、错误处理和缓存机制
+- 提供了详细的组件集成示例和最佳实践指导
+
 ## 目录
 1. [简介](#简介)
 2. [项目结构](#项目结构)
@@ -27,9 +34,11 @@
 - 与 React 组件的集成方式（依赖注入、生命周期管理、性能优化）
 - 实际使用示例，展示如何在组件中调用 MCP 工具
 
+**更新** 基于最新代码变更，新增了完整的 useMCPTool 钩子实现，包含75行核心逻辑，显著增强了MCP客户端功能。
+
 ## 项目结构
 本项目采用 Next.js + TypeScript 的工程结构，MCP 客户端能力通过 hooks 层暴露给上层组件使用：
-- src/hooks/useMCPTool.ts：实现 MCP 工具调用的自定义钩子
+- src/hooks/useMCPTool.ts：实现 MCP 工具调用的自定义钩子（新增）
 - src/components/MCPPlayground.tsx：演示如何集成 useMCPTool
 - src/components/DayDemo.tsx：另一个组件示例，展示在业务页面中的用法
 - package.json：声明项目依赖，便于确认运行时环境
@@ -51,12 +60,12 @@ B --> H
 H --> R
 ```
 
-图表来源
+**图表来源**
 - [MCPPlayground.tsx:1-200](file://src/components/MCPPlayground.tsx#L1-L200)
 - [DayDemo.tsx:1-200](file://src/components/DayDemo.tsx#L1-L200)
 - [useMCPTool.ts:1-200](file://src/hooks/useMCPTool.ts#L1-L200)
 
-章节来源
+**章节来源**
 - [useMCPTool.ts:1-200](file://src/hooks/useMCPTool.ts#L1-L200)
 - [MCPPlayground.tsx:1-200](file://src/components/MCPPlayground.tsx#L1-L200)
 - [DayDemo.tsx:1-200](file://src/components/DayDemo.tsx#L1-L200)
@@ -68,7 +77,9 @@ H --> R
 - 错误处理：捕获网络异常、协议错误、参数校验失败等，并向上抛出或回调
 - 缓存机制：按工具名与入参键值生成缓存键，避免重复请求
 
-章节来源
+**更新** useMCPTool 钩子现已包含完整的75行核心实现，提供了企业级的MCP工具调用能力。
+
+**章节来源**
 - [useMCPTool.ts:1-200](file://src/hooks/useMCPTool.ts#L1-L200)
 
 ## 架构总览
@@ -91,7 +102,7 @@ U-->>C : "返回结果或错误"
 end
 ```
 
-图表来源
+**图表来源**
 - [useMCPTool.ts:1-200](file://src/hooks/useMCPTool.ts#L1-L200)
 - [MCPPlayground.tsx:1-200](file://src/components/MCPPlayground.tsx#L1-L200)
 
@@ -134,10 +145,10 @@ ReturnData --> End
 ReturnErr --> End
 ```
 
-图表来源
+**图表来源**
 - [useMCPTool.ts:1-200](file://src/hooks/useMCPTool.ts#L1-L200)
 
-章节来源
+**章节来源**
 - [useMCPTool.ts:1-200](file://src/hooks/useMCPTool.ts#L1-L200)
 
 ### 组件集成示例：MCPPlayground
@@ -166,11 +177,11 @@ U-->>P : "更新 data/loading/error"
 P-->>P : "根据状态渲染 UI"
 ```
 
-图表来源
+**图表来源**
 - [MCPPlayground.tsx:1-200](file://src/components/MCPPlayground.tsx#L1-L200)
 - [useMCPTool.ts:1-200](file://src/hooks/useMCPTool.ts#L1-L200)
 
-章节来源
+**章节来源**
 - [MCPPlayground.tsx:1-200](file://src/components/MCPPlayground.tsx#L1-L200)
 - [useMCPTool.ts:1-200](file://src/hooks/useMCPTool.ts#L1-L200)
 
@@ -181,7 +192,7 @@ P-->>P : "根据状态渲染 UI"
   - 将调用逻辑封装为独立函数，保持组件简洁
   - 结合错误边界与加载骨架屏提升用户体验
 
-章节来源
+**章节来源**
 - [DayDemo.tsx:1-200](file://src/components/DayDemo.tsx#L1-L200)
 
 ## 依赖关系分析
@@ -199,13 +210,13 @@ Comp["组件(MCPPlayground/DayDemo)"] --> Hook["useMCPTool"]
 Hook --> Run
 ```
 
-图表来源
+**图表来源**
 - [package.json:1-200](file://package.json#L1-L200)
 - [MCPPlayground.tsx:1-200](file://src/components/MCPPlayground.tsx#L1-L200)
 - [DayDemo.tsx:1-200](file://src/components/DayDemo.tsx#L1-L200)
 - [useMCPTool.ts:1-200](file://src/hooks/useMCPTool.ts#L1-L200)
 
-章节来源
+**章节来源**
 - [package.json:1-200](file://package.json#L1-L200)
 - [MCPPlayground.tsx:1-200](file://src/components/MCPPlayground.tsx#L1-L200)
 - [DayDemo.tsx:1-200](file://src/components/DayDemo.tsx#L1-L200)
@@ -224,8 +235,6 @@ Hook --> Run
   - 使用 memoization 避免不必要的重渲染
   - 将重型计算移出渲染路径
 
-[本节为通用指导，不直接分析具体文件]
-
 ## 故障排查指南
 - 常见问题
   - 参数校验失败：检查必填字段与类型约束
@@ -237,13 +246,13 @@ Hook --> Run
   - 使用浏览器开发者工具监控网络请求
   - 逐步缩小问题范围，定位是组件层还是钩子层
 
-章节来源
+**章节来源**
 - [useMCPTool.ts:1-200](file://src/hooks/useMCPTool.ts#L1-L200)
 
 ## 结论
 useMCPTool 为 MCP 工具调用提供了统一、可配置且高性能的抽象。通过状态管理、缓存与错误处理，显著降低了组件层的复杂度。配合依赖注入与生命周期管理，可在各类 React 场景中稳定复用。建议在项目中遵循本文的最佳实践，以获得一致的开发体验与良好的性能表现。
 
-[本节为总结性内容，不直接分析具体文件]
+**更新** 随着75行核心实现的加入，useMCPTool 现在提供了更强大的MCP工具集成能力，包括完整的错误处理、缓存机制和性能优化。
 
 ## 附录
 - 使用示例（步骤说明）
@@ -256,5 +265,3 @@ useMCPTool 为 MCP 工具调用提供了统一、可配置且高性能的抽象�
   - [MCPPlayground.tsx](file://src/components/MCPPlayground.tsx)
   - [DayDemo.tsx](file://src/components/DayDemo.tsx)
   - [package.json](file://package.json)
-
-[本节为补充信息，不直接分析具体文件]
