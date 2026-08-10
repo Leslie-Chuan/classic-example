@@ -9,6 +9,7 @@ import {
   ListToolsRequestSchema,
   Tool,
 } from "@modelcontextprotocol/sdk/types.js";
+// 在运行时对真实数据进行结构校验，并在失败时明确抛错
 import { z } from "zod";
 
 // ═══════════════════════════════════════════════
