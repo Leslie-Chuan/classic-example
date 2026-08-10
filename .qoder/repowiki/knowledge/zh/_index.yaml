@@ -1,0 +1,57 @@
+# 知识卡导出索引文件
+schema_version: 1
+locale: zh-CN
+branch: main
+nodes_managed: true
+exported_at: "2026-08-10T02:46:37Z"
+modules:
+    "":
+        dir_name: AI 前端每日学习计划仓库
+        title: AI 前端每日学习计划仓库
+        scope:
+            - README.md
+            - .gitignore
+            - package.json
+            - package-lock.json
+            - next.config.ts
+            - tsconfig.json
+            - eslint.config.mjs
+            - postcss.config.mjs
+        source_files: []
+        children:
+            - app
+            - content
+            - demos
+        depends_on: []
+        related_to: []
+    app:
+        dir_name: AI 前端每日学习计划仪表盘
+        title: AI 前端每日学习计划仪表盘
+        scope:
+            - src/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: content
+            - path: demos
+    content:
+        dir_name: MCP 协议每日学习笔记
+        title: MCP 协议每日学习笔记
+        scope:
+            - content/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: app
+    demos:
+        dir_name: MCP 协议入门演示（Day1 文件系统 Server_Client）
+        title: MCP 协议入门演示（Day1 文件系统 Server/Client）
+        scope:
+            - demos/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: app

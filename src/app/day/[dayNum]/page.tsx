@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getDayByNumber, getAllDays } from "@/lib/content";
 import { renderMarkdown } from "@/lib/markdown";
+import DayDemo from "@/components/DayDemo";
 
 export async function generateStaticParams() {
   const days = getAllDays();
@@ -41,6 +42,9 @@ export default async function DayPage({ params }: { params: Promise<{ dayNum: st
 
       {/* Content */}
       <div className="prose" dangerouslySetInnerHTML={{ __html: html }} />
+
+      {/* Interactive Demo (if available for this day) */}
+      <DayDemo dayNum={num} />
 
       {/* Navigation */}
       <div className="flex items-center justify-between mt-12 pt-6 border-t border-zinc-800">

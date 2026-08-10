@@ -1,0 +1,16 @@
+{
+  "name": "mcp-day1",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "server": "tsx file-system-server.ts",
+    "test": "tsx test-client.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.0"
+  }
+}

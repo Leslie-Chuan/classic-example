@@ -1,0 +1,9 @@
+schema_version: 1
+module_path: demos
+title: MCP 协议入门演示（Day1 文件系统 Server/Client）
+scope:
+    - demos/
+source_files: []
+depends_on: []
+related_to:
+    - path: app
