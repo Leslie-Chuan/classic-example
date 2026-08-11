@@ -3,11 +3,11 @@ schema_version: 1
 locale: zh-CN
 branch: main
 nodes_managed: true
-exported_at: "2026-08-10T07:56:57Z"
+exported_at: "2026-08-11T01:58:23Z"
 modules:
     "":
-        dir_name: MCP 协议学习实验室（Next.js 仪表盘 + 笔记 + 示例）
-        title: MCP 协议学习实验室（Next.js 仪表盘 + 笔记 + 示例）
+        dir_name: MCP 协议学习实验室（Next.js 仪表盘 + Markdown 笔记 + 教学示例）
+        title: MCP 协议学习实验室（Next.js 仪表盘 + Markdown 笔记 + 教学示例）
         scope:
             - README.md
             - .gitignore
@@ -34,7 +34,6 @@ modules:
         depends_on: []
         related_to:
             - path: content
-            - path: demos
     content:
         dir_name: MCP 协议每日学习笔记
         title: MCP 协议每日学习笔记
@@ -45,15 +44,22 @@ modules:
         depends_on: []
         related_to:
             - path: app
-            - path: demos
     demos:
-        dir_name: MCP 协议教学示例（Day1_Day2）
-        title: MCP 协议教学示例（Day1/Day2）
+        dir_name: MCP 协议教学演示套件
+        title: MCP 协议教学演示套件
         scope:
             - demos/
         source_files: []
+        children:
+            - demos/day3_mcp_client
+        depends_on: []
+        related_to: []
+    demos/day3_mcp_client:
+        dir_name: MCP 智能客户端示例（Day 3）
+        title: MCP 智能客户端示例（Day 3）
+        scope:
+            - demos/day3-mcp-client/
+        source_files: []
         children: []
         depends_on: []
-        related_to:
-            - path: app
-            - path: content
+        related_to: []

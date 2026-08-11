@@ -1,0 +1,8 @@
+schema_version: 1
+module_path: demos
+title: MCP 协议教学演示套件
+scope:
+    - demos/
+source_files: []
+depends_on: []
+related_to: []

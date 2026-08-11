@@ -1,0 +1,8 @@
+schema_version: 1
+module_path: demos/day3_mcp_client
+title: MCP 智能客户端示例（Day 3）
+scope:
+    - demos/day3-mcp-client/
+source_files: []
+depends_on: []
+related_to: []

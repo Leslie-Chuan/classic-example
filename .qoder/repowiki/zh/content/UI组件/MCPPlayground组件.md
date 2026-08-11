@@ -15,9 +15,9 @@
 
 ## 更新摘要
 **所做更改**
-- 基于新增的Day2MCPPlayground组件更新了文档，提供三层架构可视化和Tool交互实验功能
-- 添加了Day2MCPPlayground组件的详细文档和使用示例
-- 完善了三层架构可视化展示和工具交互流程说明
+- 基于新增的Day3MCPPlayground组件更新了文档，提供交互式MCP客户端模拟和JSON-RPC消息流可视化功能
+- 添加了Day3MCPPlayground组件的详细文档和使用示例
+- 完善了MCP客户端模拟、JSON-RPC消息流可视化和调试工具说明
 - 增强了MCP工具调用交互流程和错误处理机制文档
 - 补充了响应式设计、无障碍合规性和性能优化指导
 
@@ -36,7 +36,7 @@
 ## 简介
 本文件为 MCPPlayground 组件的完整技术文档，面向开发者与使用者，覆盖视觉外观、交互行为、属性（props）、事件、插槽、自定义选项、响应式设计与无障碍合规性、状态与动画过渡、样式与主题、跨浏览器兼容性与性能优化，以及与 MCP 工具调用的交互流程和错误处理机制。该组件用于在 Next.js 应用中以可交互的方式演示和调试 MCP（Model Context Protocol）工具调用，提供完整的测试环境和用户友好的操作界面。
 
-**更新** 新增了Day2MCPPlayground组件，提供三层架构可视化和Tool交互实验功能，增强了MCP工具的学习和调试体验。
+**更新** 新增了Day3MCPPlayground组件，提供交互式MCP客户端模拟和JSON-RPC消息流可视化功能，进一步增强了MCP工具的学习和调试体验。
 
 ## 项目结构
 本项目采用 Next.js + TypeScript 的前端工程结构，MCPPlayground位于src/components下，通过hooks/useMCPTool封装MCP工具调用逻辑，并在页面路由中按需加载与展示。
@@ -48,14 +48,19 @@ B --> C["按天路由页<br/>src/app/day/[dayNum]/page.tsx"]
 C --> D["日演示容器<br/>src/components/DayDemo.tsx"]
 D --> E["基础MCP演示组件<br/>src/components/MCPPlayground.tsx"]
 D --> F["三层架构MCP演示组件<br/>src/components/Day2MCPPlayground.tsx"]
-E --> G["MCP工具Hook<br/>src/hooks/useMCPTool.ts"]
-F --> G
-E --> H["内容常量<br/>src/lib/constants.ts"]
+D --> G["MCP客户端模拟组件<br/>src/components/Day3MCPPlayground.tsx"]
+E --> H["MCP工具Hook<br/>src/hooks/useMCPTool.ts"]
 F --> H
-E --> I["内容数据<br/>src/lib/content.ts"]
+G --> H
+E --> I["内容常量<br/>src/lib/constants.ts"]
 F --> I
-E --> J["Markdown解析<br/>src/lib/markdown.ts"]
+G --> I
+E --> J["内容数据<br/>src/lib/content.ts"]
 F --> J
+G --> J
+E --> K["Markdown解析<br/>src/lib/markdown.ts"]
+F --> K
+G --> K
 ```
 
 图表来源
@@ -80,7 +85,8 @@ F --> J
 
 ## 核心组件
 - MCPPlayground：提供基础MCP工具的可视化演示界面，包含输入表单、调用按钮、结果输出区、日志面板等。支持主题切换、响应式布局、键盘导航与屏幕阅读器友好提示。
-- Day2MCPPlayground：**新增** 提供三层架构可视化的高级MCP演示组件，专门用于展示和实验Tool交互流程，包含架构图示、参数配置、调用历史和结果对比等功能。
+- Day2MCPPlayground：提供三层架构可视化的高级MCP演示组件，专门用于展示和实验Tool交互流程，包含架构图示、参数配置、调用历史和结果对比等功能。
+- Day3MCPPlayground：**新增** 提供交互式MCP客户端模拟和JSON-RPC消息流可视化功能，支持实时消息跟踪、协议分析和调试工具。
 - useMCPTool：封装MCP工具调用生命周期，包括初始化、参数校验、请求发送、重试、超时、错误捕获与结果缓存。
 - DayDemo：按"天"组织演示用例，将MCPPlayground嵌入到具体场景的上下文中。
 - 路由与内容：day/[dayNum]/page.tsx负责渲染当日演示；constants.ts、content.ts、markdown.ts提供静态内容与Markdown解析能力。
@@ -98,26 +104,31 @@ F --> J
 ## 架构总览
 MCPPlayground通过useMCPTool与后端或本地MCP Server进行通信，遵循以下流程：用户输入 → 参数校验 → 构建请求 → 发送请求 → 接收响应 → 更新UI → 记录日志。错误路径包括网络异常、服务端错误、超时、重试耗尽等，均会反馈至UI并记录日志。
 
-**更新** Day2MCPPlayground组件提供了三层架构可视化展示，帮助用户理解MCP工具调用的完整流程。
+**更新** Day2MCPPlayground和Day3MCPPlayground组件分别提供了三层架构可视化和JSON-RPC消息流可视化，帮助用户深入理解MCP工具调用的完整流程。
 
 ```mermaid
 sequenceDiagram
 participant U as "用户"
 participant P as "MCPPlayground"
 participant P2 as "Day2MCPPlayground"
+participant P3 as "Day3MCPPlayground"
 participant H as "useMCPTool"
 participant S as "MCP服务"
 U->>P : "填写参数并点击调用"
 U->>P2 : "查看三层架构可视化"
+U->>P3 : "监控JSON-RPC消息流"
 P->>H : "触发调用(参数)"
 P2->>H : "执行Tool交互实验"
+P3->>H : "模拟MCP客户端调用"
 H->>H : "参数校验/构建请求"
 H->>S : "发送MCP工具调用"
 S-->>H : "返回结果或错误"
 H-->>P : "回调结果/错误"
 H-->>P2 : "回调结果/错误"
+H-->>P3 : "回调结果/错误"
 P->>P : "更新视图/记录日志"
 P2->>P2 : "更新架构可视化/记录日志"
+P3->>P3 : "更新消息流可视化/记录日志"
 Note over P,H : "失败时执行重试/超时策略"
 ```
 
@@ -177,7 +188,7 @@ Note over P,H : "失败时执行重试/超时策略"
   - 基于断点的Flex/Grid布局，确保小屏可用性。
   - 触摸友好的按钮尺寸与间距。
 - 无障碍（a11y）
-  - 语义化标签、aria-*属性、键盘可达性、焦点管理、屏幕阅读器提示。
+  - 语义化标签、aria-*属性、键盘可达性、焦点管理、屏幕阅读器友好提示。
   - 颜色对比度符合WCAG AA。
 - 跨浏览器兼容性
   - 使用现代Web API并提供降级方案（如fetch替代、Promise polyfill）。
@@ -196,7 +207,7 @@ Note over P,H : "失败时执行重试/超时策略"
 
 ### Day2MCPPlayground 组件
 
-**新增** 三层架构可视化和Tool交互实验功能的增强版MCP演示组件
+**更新** 三层架构可视化和Tool交互实验功能的增强版MCP演示组件
 
 - 视觉外观
   - 三层架构可视化展示：表示层、业务层、数据层的清晰分层图示。
@@ -262,6 +273,75 @@ Note over P,H : "失败时执行重试/超时策略"
 - [MCPPlayground.tsx:1-200](file://src/components/MCPPlayground.tsx#L1-L200)
 - [useMCPTool.ts:1-200](file://src/hooks/useMCPTool.ts#L1-L200)
 
+### Day3MCPPlayground 组件
+
+**新增** 交互式MCP客户端模拟和JSON-RPC消息流可视化功能
+
+- 视觉外观
+  - JSON-RPC消息流可视化：实时展示请求和响应的完整消息流。
+  - MCP客户端模拟器：模拟真实的MCP客户端行为和协议交互。
+  - 消息编辑器：支持手动编辑JSON-RPC消息和参数。
+  - 协议分析面板：显示详细的协议信息和元数据。
+  - 调试控制台：提供丰富的调试工具和日志输出。
+- 行为与交互
+  - 消息流监控：实时跟踪JSON-RPC消息的发送和接收过程。
+  - 客户端模拟：模拟MCP客户端的完整生命周期和行为。
+  - 协议分析：深度分析MCP协议结构和消息格式。
+  - 调试工具：提供断点、单步执行、变量检查等调试功能。
+  - 性能分析：监控消息传输性能和资源使用情况。
+- Props（属性）
+  - endpoint：MCP服务端端点地址。
+  - enableSimulation：是否启用客户端模拟。
+  - enableAnalysis：是否启用协议分析。
+  - messageLimit：消息历史记录限制。
+  - debugMode：是否启用调试模式。
+  - autoReconnect：是否启用自动重连。
+  - customHeaders：自定义HTTP头配置。
+- 事件
+  - onMessageSent：消息发送事件。
+  - onMessageReceived：消息接收事件。
+  - onConnectionChange：连接状态变更事件。
+  - onProtocolError：协议错误事件。
+  - onPerformanceReport：性能报告事件。
+- 插槽（Slots）
+  - messageViewer：自定义消息查看器。
+  - analysisPanel：自定义分析面板。
+  - debuggerPanel：自定义调试面板。
+  - consolePanel：自定义控制台面板。
+- 自定义选项
+  - 协议配置：支持自定义MCP协议版本和扩展。
+  - 调试设置：支持自定义调试选项和日志级别。
+  - 性能监控：支持自定义性能指标和阈值。
+  - 主题样式：支持自定义消息流可视化样式。
+- 状态管理
+  - 内部状态：connection、messages、analysis、debug、performance等。
+  - 副作用：连接管理、消息处理、协议分析、性能监控。
+- 动画与过渡
+  - 消息流动画：展示消息传输过程的动态效果。
+  - 状态转换动画：平滑的连接状态和消息状态过渡。
+  - 性能指标动画：实时的性能数据可视化动画。
+- 响应式设计
+  - 自适应布局：根据屏幕大小调整消息流和面板布局。
+  - 触摸优化：支持移动端的触摸手势操作。
+  - 弹性网格：灵活的网格系统适应不同设备。
+- 无障碍（a11y）
+  - 消息流可访问性：支持屏幕阅读器读取消息内容。
+  - 调试模式辅助：为调试模式提供辅助功能支持。
+  - 键盘导航：完整的键盘操作支持。
+- 跨浏览器兼容性
+  - 现代特性支持：利用WebSocket、EventSource等现代API。
+  - 渐进增强：在不支持特性的浏览器上提供基础功能。
+  - 兼容性检测：自动检测浏览器能力并调整功能。
+- 组合模式与集成
+  - 与MCPPlayground集成：作为高级调试工具提供额外功能。
+  - 与DayDemo组合：按"天"组织高级演示用例。
+  - 与useMCPTool集成：复用底层工具调用能力。
+
+章节来源
+- [Day3MCPPlayground.tsx:1-200](file://src/components/Day3MCPPlayground.tsx#L1-L200)
+- [MCPPlayground.tsx:1-200](file://src/components/MCPPlayground.tsx#L1-L200)
+- [useMCPTool.ts:1-200](file://src/hooks/useMCPTool.ts#L1-L200)
+
 ### useMCPTool Hook
 
 **更新** 增强了错误处理和性能优化功能
@@ -306,22 +386,28 @@ Note over P,H : "失败时执行重试/超时策略"
 - [markdown.ts:1-200](file://src/lib/markdown.ts#L1-L200)
 
 ## 依赖关系分析
-MCPPlayground依赖useMCPTool完成工具调用，依赖constants/content/markdown提供内容与配置；页面层负责路由与组装。Day2MCPPlayground作为增强版本，复用了MCPPlayground的核心功能并添加了额外的可视化功能。
+MCPPlayground依赖useMCPTool完成工具调用，依赖constants/content/markdown提供内容与配置；页面层负责路由与组装。Day2MCPPlayground和Day3MCPPlayground作为增强版本，复用了MCPPlayground的核心功能并添加了额外的可视化功能。
 
 ```mermaid
 graph LR
 P["page.tsx"] --> D["DayDemo.tsx"]
 D --> M["MCPPlayground.tsx"]
 D --> M2["Day2MCPPlayground.tsx"]
+D --> M3["Day3MCPPlayground.tsx"]
 M --> H["useMCPTool.ts"]
 M2 --> H
+M3 --> H
 M --> C["constants.ts"]
 M2 --> C
+M3 --> C
 M --> N["content.ts"]
 M2 --> N
+M3 --> N
 M --> MD["markdown.ts"]
 M2 --> MD
+M3 --> MD
 M2 -.-> M
+M3 -.-> M
 ```
 
 图表来源
@@ -342,7 +428,7 @@ M2 -.-> M
 
 ## 性能考虑
 
-**更新** 增加了更详细的性能优化策略，特别关注Day2MCPPlayground的性能优化
+**更新** 增加了更详细的性能优化策略，特别关注Day2MCPPlayground和Day3MCPPlayground的性能优化
 
 - 请求优化
   - 使用防抖/节流减少频繁调用。
@@ -355,22 +441,25 @@ M2 -.-> M
   - 懒加载Markdown内容。
   - 增量更新和状态优化。
   - **新增** Day2MCPPlayground的架构可视化虚拟化渲染。
+  - **新增** Day3MCPPlayground的消息流虚拟化渲染。
 - 内存管理
   - 及时清理定时器与事件监听。
   - 取消未完成的请求，防止内存泄漏。
   - 组件卸载时的资源清理。
   - **新增** 实验模式的内存优化和资源回收。
+  - **新增** 消息流的内存管理和垃圾回收。
 - 网络与缓存
   - 利用HTTP缓存头与前端缓存策略。
   - 对只读数据做持久化缓存（localStorage/sessionStorage）。
   - 智能缓存失效和更新策略。
   - **新增** 调用历史的智能缓存和压缩存储。
+  - **新增** JSON-RPC消息的缓存和去重机制。
 
 [本节为通用指导，不直接分析具体文件]
 
 ## 故障排查指南
 
-**更新** 增强了错误诊断和解决方案，特别关注Day2MCPPlayground的常见问题
+**更新** 增强了错误诊断和解决方案，特别关注Day2MCPPlayground和Day3MCPPlayground的常见问题
 
 - 常见问题
   - 调用无响应：检查网络、CORS、超时配置、重试策略。
@@ -381,6 +470,9 @@ M2 -.-> M
   - **新增** 架构可视化不显示：检查依赖库加载和配置参数。
   - **新增** 实验模式异常：验证实验配置和权限设置。
   - **新增** 历史记录丢失：检查存储权限和本地存储状态。
+  - **新增** JSON-RPC消息流异常：检查网络连接和协议配置。
+  - **新增** 客户端模拟失败：验证MCP服务端配置和端点地址。
+  - **新增** 协议分析错误：检查协议版本兼容性和扩展配置。
 - 调试建议
   - 开启详细日志，导出日志便于定位问题。
   - 使用浏览器开发者工具的网络面板抓包。
@@ -388,6 +480,8 @@ M2 -.-> M
   - 监控组件状态变化和性能指标。
   - **新增** 使用Day2MCPPlayground的内置调试工具。
   - **新增** 启用架构可视化的调试模式。
+  - **新增** 使用Day3MCPPlayground的协议分析工具。
+  - **新增** 启用JSON-RPC消息流的调试模式。
 - 错误分类与处理
   - 网络错误：提示用户检查网络并重试。
   - 服务端错误：展示错误码与消息，提供反馈入口。
@@ -396,16 +490,19 @@ M2 -.-> M
   - 客户端错误：验证输入参数和配置选项。
   - **新增** 可视化错误：提供架构配置的验证和修复建议。
   - **新增** 实验错误：提供实验环境的诊断和恢复功能。
+  - **新增** 协议错误：提供JSON-RPC协议的诊断和修复工具。
+  - **新增** 连接错误：提供连接状态监控和自动重连功能。
 
 章节来源
 - [useMCPTool.ts:1-200](file://src/hooks/useMCPTool.ts#L1-L200)
 - [MCPPlayground.tsx:1-200](file://src/components/MCPPlayground.tsx#L1-L200)
 - [Day2MCPPlayground.tsx:1-200](file://src/components/Day2MCPPlayground.tsx#L1-L200)
+- [Day3MCPPlayground.tsx:1-200](file://src/components/Day3MCPPlayground.tsx#L1-L200)
 
 ## 结论
 MCPPlayground提供了直观、可配置的MCP工具演示界面，结合useMCPTool实现了健壮的调用流程与错误处理。通过主题、响应式与无障碍设计，确保了良好的用户体验与可访问性。建议在项目中按需组合DayDemo与内容模块，以实现丰富的演示场景。
 
-**更新** 新增的Day2MCPPlayground组件进一步增强了MCP工具的学习和调试体验，通过三层架构可视化和Tool交互实验功能，为用户提供了更加深入和全面的MCP工具探索环境。两个组件的组合使用可以满足从基础学习到高级调试的不同需求层次。
+**更新** 新增的Day2MCPPlayground和Day3MCPPlayground组件进一步增强了MCP工具的学习和调试体验。Day2MCPPlayground通过三层架构可视化和Tool交互实验功能，Day3MCPPlayground通过交互式MCP客户端模拟和JSON-RPC消息流可视化，为用户提供了更加深入和全面的MCP工具探索环境。三个组件的组合使用可以满足从基础学习到高级调试的不同需求层次。
 
 [本节为总结，不直接分析具体文件]
 
@@ -420,6 +517,10 @@ MCPPlayground提供了直观、可配置的MCP工具演示界面，结合useMCPT
   - 参考路径：[Day2MCPPlayground.tsx:1-200](file://src/components/Day2MCPPlayground.tsx#L1-L200)
 - Tool交互实验：在Day2MCPPlayground中进行Tool交互实验和调试。
   - 参考路径：[Day2MCPPlayground.tsx:1-200](file://src/components/Day2MCPPlayground.tsx#L1-L200)
+- **新增** JSON-RPC消息流监控：使用Day3MCPPlayground监控JSON-RPC消息流。
+  - 参考路径：[Day3MCPPlayground.tsx:1-200](file://src/components/Day3MCPPlayground.tsx#L1-L200)
+- **新增** MCP客户端模拟：在Day3MCPPlayground中模拟MCP客户端行为。
+  - 参考路径：[Day3MCPPlayground.tsx:1-200](file://src/components/Day3MCPPlayground.tsx#L1-L200)
 - 组合演示：在DayDemo中按天组织多个MCPPlayground实例。
   - 参考路径：[DayDemo.tsx:1-200](file://src/components/DayDemo.tsx#L1-L200)
 - 路由集成：在day/[dayNum]/page.tsx中根据路由参数渲染对应演示。
@@ -431,6 +532,7 @@ MCPPlayground提供了直观、可配置的MCP工具演示界面，结合useMCPT
 - 在小屏上隐藏次要信息，聚焦核心操作。
 - 自适应内容布局和弹性网格系统。
 - **新增** Day2MCPPlayground的架构可视化响应式适配。
+- **新增** Day3MCPPlayground的消息流可视化响应式适配。
 
 ### 无障碍合规性
 - 语义化结构与aria-*属性。
@@ -438,6 +540,7 @@ MCPPlayground提供了直观、可配置的MCP工具演示界面，结合useMCPT
 - 颜色对比度与屏幕阅读器友好文案。
 - 符合WCAG 2.1 AA标准。
 - **新增** 架构可视化的无障碍支持和屏幕阅读器优化。
+- **新增** JSON-RPC消息流的无障碍支持和屏幕阅读器优化。
 
 ### 样式与主题
 - 通过CSS变量定义主题色、字体、间距、圆角、阴影。
@@ -445,6 +548,7 @@ MCPPlayground提供了直观、可配置的MCP工具演示界面，结合useMCPT
 - 提供className扩展点，便于定制样式。
 - 模块化样式结构和CSS-in-JS支持。
 - **新增** Day2MCPPlayground的架构可视化主题支持。
+- **新增** Day3MCPPlayground的消息流可视化主题支持。
 
 ### 跨浏览器兼容性
 - 使用现代Web API并提供降级方案。
@@ -452,6 +556,7 @@ MCPPlayground提供了直观、可配置的MCP工具演示界面，结合useMCPT
 - 避免使用实验性特性或提供feature detection。
 - Polyfill支持和渐进增强策略。
 - **新增** Day2MCPPlayground的浏览器能力检测和兼容性处理。
+- **新增** Day3MCPPlayground的WebSocket和现代API兼容性处理。
 
 ### 性能优化清单
 - 防抖/节流、请求去重、超时与重试策略。
@@ -460,6 +565,7 @@ MCPPlayground提供了直观、可配置的MCP工具演示界面，结合useMCPT
 - 缓存策略与资源压缩。
 - 代码分割和按需加载。
 - **新增** Day2MCPPlayground的架构可视化性能优化。
+- **新增** Day3MCPPlayground的消息流性能优化。
 - **新增** 实验模式的性能监控和优化。
 
 ### MCP工具调用最佳实践
@@ -469,3 +575,5 @@ MCPPlayground提供了直观、可配置的MCP工具演示界面，结合useMCPT
 - 用户体验优化和反馈机制。
 - **新增** 三层架构设计的最佳实践。
 - **新增** Tool交互实验的设计模式和调试技巧。
+- **新增** JSON-RPC协议的最佳实践和调试方法。
+- **新增** MCP客户端模拟的设计模式和测试策略。
