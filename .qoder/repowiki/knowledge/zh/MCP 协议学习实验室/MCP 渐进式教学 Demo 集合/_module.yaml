@@ -1,6 +1,6 @@
 schema_version: 1
 module_path: demos
-title: MCP 协议教学演示套件
+title: MCP 渐进式教学 Demo 集合
 scope:
     - demos/
 source_files: []

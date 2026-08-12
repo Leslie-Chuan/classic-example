@@ -3,11 +3,11 @@ schema_version: 1
 locale: zh-CN
 branch: main
 nodes_managed: true
-exported_at: "2026-08-11T01:58:23Z"
+exported_at: "2026-08-11T08:42:51Z"
 modules:
     "":
-        dir_name: MCP 协议学习实验室（Next.js 仪表盘 + Markdown 笔记 + 教学示例）
-        title: MCP 协议学习实验室（Next.js 仪表盘 + Markdown 笔记 + 教学示例）
+        dir_name: MCP 协议学习实验室
+        title: MCP 协议学习实验室
         scope:
             - README.md
             - .gitignore
@@ -25,8 +25,8 @@ modules:
         depends_on: []
         related_to: []
     app:
-        dir_name: AI 前端每日学习仪表盘（Next.js App Router）
-        title: AI 前端每日学习仪表盘（Next.js App Router）
+        dir_name: AI 前端每日学习进度仪表盘
+        title: AI 前端每日学习进度仪表盘
         scope:
             - src/
         source_files: []
@@ -45,13 +45,14 @@ modules:
         related_to:
             - path: app
     demos:
-        dir_name: MCP 协议教学演示套件
-        title: MCP 协议教学演示套件
+        dir_name: MCP 渐进式教学 Demo 集合
+        title: MCP 渐进式教学 Demo 集合
         scope:
             - demos/
         source_files: []
         children:
             - demos/day3_mcp_client
+            - demos/day5_security
         depends_on: []
         related_to: []
     demos/day3_mcp_client:
@@ -62,4 +63,15 @@ modules:
         source_files: []
         children: []
         depends_on: []
-        related_to: []
+        related_to:
+            - path: demos/day5_security
+    demos/day5_security:
+        dir_name: MCP 安全模型演示：无权限 Server 与四层防御 Client
+        title: MCP 安全模型演示：无权限 Server 与四层防御 Client
+        scope:
+            - demos/day5-security/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to:
+            - path: demos/day3_mcp_client

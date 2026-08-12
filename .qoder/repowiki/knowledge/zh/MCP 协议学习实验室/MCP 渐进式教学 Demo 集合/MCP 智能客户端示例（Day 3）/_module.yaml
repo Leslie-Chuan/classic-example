@@ -5,4 +5,5 @@ scope:
     - demos/day3-mcp-client/
 source_files: []
 depends_on: []
-related_to: []
+related_to:
+    - path: demos/day5_security

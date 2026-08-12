@@ -1,0 +1,9 @@
+schema_version: 1
+module_path: demos/day5_security
+title: MCP 安全模型演示：无权限 Server 与四层防御 Client
+scope:
+    - demos/day5-security/
+source_files: []
+depends_on: []
+related_to:
+    - path: demos/day3_mcp_client
