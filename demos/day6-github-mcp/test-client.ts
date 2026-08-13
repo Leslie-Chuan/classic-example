@@ -5,17 +5,22 @@ import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { StdioClientTransport } from "@modelcontextprotocol/sdk/client/stdio.js";
 import path from "path";
 
+// 获取server路径
 const SERVER_PATH = path.resolve(import.meta.dirname, "server.ts");
 
 async function createClient(envVars: Record<string, string> = {}): Promise<Client> {
   const env = { ...process.env, ...envVars };
+  // 创建 transport
   const transport = new StdioClientTransport({
     command: "npx",
     args: ["tsx", SERVER_PATH],
     cwd: import.meta.dirname,
     env: env as any,
   });
+  // 创建 client
   const client = new Client({ name: "day6-test-client", version: "1.0.0" });
+
+  // 连接 server
   await client.connect(transport);
   return client;
 }
