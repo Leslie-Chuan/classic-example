@@ -1,0 +1,14 @@
+{
+  "name": "day8-mini-agent",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "agent": "tsx mini-agent.ts",
+    "demo": "tsx demo-runner.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.0",
+    "@types/node": "^20.14.0"
+  }
+}

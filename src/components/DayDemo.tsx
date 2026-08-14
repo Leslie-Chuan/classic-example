@@ -7,6 +7,7 @@ const Day2MCPPlayground = dynamic(() => import("./Day2MCPPlayground"), { ssr: fa
 const Day3MCPPlayground = dynamic(() => import("./Day3MCPPlayground"), { ssr: false });
 const Day5MCPPlayground = dynamic(() => import("./Day5MCPPlayground"), { ssr: false });
 const Day6MCPPlayground = dynamic(() => import("./Day6MCPPlayground"), { ssr: false });
+const Day8MCPPlayground = dynamic(() => import("./Day8MCPPlayground"), { ssr: false });
 
 // Day 编号 → 对应的交互 Demo 组件
 const DEMO_MAP: Record<number, React.ComponentType> = {
@@ -15,6 +16,7 @@ const DEMO_MAP: Record<number, React.ComponentType> = {
   3: Day3MCPPlayground,
   5: Day5MCPPlayground,
   6: Day6MCPPlayground,
+  8: Day8MCPPlayground,
 };
 
 interface Props {
