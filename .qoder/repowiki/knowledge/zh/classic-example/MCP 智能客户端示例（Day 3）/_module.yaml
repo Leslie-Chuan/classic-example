@@ -1,9 +1,8 @@
 schema_version: 1
-module_path: demos/day3_mcp_client
+module_path: 43b9198c-6201-400a-90a9-83e3931a68a7
 title: MCP 智能客户端示例（Day 3）
 scope:
     - demos/day3-mcp-client/
 source_files: []
 depends_on: []
-related_to:
-    - path: demos/day5_security
+related_to: []

@@ -1,15 +1,10 @@
 ---
 kind: frontend_style
 name: 基于 Tailwind CSS v4 + 暗色主题的 Next.js 前端样式体系
+slug: frontend_style
 category: frontend_style
 scope:
     - '**'
-source_files:
-    - src/app/globals.css
-    - postcss.config.mjs
-    - package.json
-    - src/app/layout.tsx
-    - src/components/DayCard.tsx
 ---
 
 ## 1. 系统/技术栈

@@ -1,9 +1,8 @@
 schema_version: 1
-module_path: content
+module_path: aa8845c5-e566-4ff3-8596-f698448a2412/77fee85e-be00-40ec-b5f1-12a638622bd2
 title: MCP 协议每日学习笔记
 scope:
     - content/
 source_files: []
 depends_on: []
-related_to:
-    - path: app
+related_to: []

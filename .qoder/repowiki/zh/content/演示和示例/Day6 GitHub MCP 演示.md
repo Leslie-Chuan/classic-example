@@ -13,6 +13,13 @@
 - [src/app/day/[dayNum]/page.tsx](file://src/app/day/[dayNum]/page.tsx)
 </cite>
 
+## 更新摘要
+**变更内容**
+- 更新了测试客户端创建流程，实现了统一的服务端路径获取
+- 增强了传输层创建的注释说明
+- 改进了客户端创建步骤的文档说明
+- 澄清了客户端与服务端之间的连接过程
+
 ## 目录
 1. [简介](#简介)
 2. [项目结构](#项目结构)
@@ -26,7 +33,7 @@
 10. [附录](#附录)
 
 ## 简介
-本仓库是一个以“每日主题”形式组织的学习与演示集合，其中 Day6 聚焦于使用 MCP（Model Context Protocol）对接 GitHub，提供 Issues 相关的工具能力。该演示包含：
+本仓库是一个以"每日主题"形式组织的学习与演示集合，其中 Day6 聚焦于使用 MCP（Model Context Protocol）对接 GitHub，提供 Issues 相关的工具能力。该演示包含：
 - 一个 MCP 服务端，暴露与 GitHub Issues 交互的工具；
 - 一个测试客户端，用于调用这些工具；
 - 前端可交互的 Playground，便于在浏览器中体验 MCP 工具；
@@ -91,7 +98,7 @@ S --> D
 - [src/app/day/[dayNum]/page.tsx](file://src/app/day/[dayNum]/page.tsx)
 
 ## 架构总览
-整体架构遵循“前端 UI -> Hook 通信 -> MCP 服务端 -> 领域模型/外部 API”的分层模式。前端通过 Hook 发起工具调用，服务端负责业务编排与外部集成，领域模型保证数据结构一致。
+整体架构遵循"前端 UI -> Hook 通信 -> MCP 服务端 -> 领域模型/外部 API"的分层模式。前端通过 Hook 发起工具调用，服务端负责业务编排与外部集成，领域模型保证数据结构一致。
 
 ```mermaid
 sequenceDiagram
@@ -153,11 +160,13 @@ ErrAPI --> Return
 - 打印输出结果或错误；
 - 用于本地快速验证工具行为。
 
+**更新** 优化了客户端创建流程，实现了统一的服务端路径获取机制，增强了传输层创建的注释说明，改进了客户端创建步骤的文档说明，并澄清了客户端与服务端之间的连接过程。
+
 ```mermaid
 sequenceDiagram
 participant T as "test-client.ts"
 participant S as "server.ts"
-T->>S : 建立连接
+T->>S : 建立连接统一路径获取
 T->>S : 调用工具(参数)
 S-->>T : 返回结果/错误
 T->>T : 打印输出
@@ -315,7 +324,7 @@ TEST["test-client.ts"] --> SRV
 - [src/components/Day6MCPPlayground.tsx](file://src/components/Day6MCPPlayground.tsx)
 
 ## 结论
-Day6 演示通过 MCP 将 GitHub Issues 能力以工具化方式暴露给前端与测试客户端，实现了清晰的分层与良好的可扩展性。建议后续完善错误分类、增加单元测试与覆盖率，并补充更丰富的工具与交互体验。
+Day6 演示通过 MCP 将 GitHub Issues 能力以工具化方式暴露给前端与测试客户端，实现了清晰的分层与良好的可扩展性。测试客户端的优化进一步提升了连接稳定性和代码可读性。建议后续完善错误分类、增加单元测试与覆盖率，并补充更丰富的工具与交互体验。
 
 [本节为总结，不直接分析具体文件]
 

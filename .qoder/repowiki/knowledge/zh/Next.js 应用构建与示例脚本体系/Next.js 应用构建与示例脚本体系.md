@@ -1,17 +1,10 @@
 ---
 kind: build_system
 name: Next.js 应用构建与示例脚本体系
+slug: build_system
 category: build_system
 scope:
     - '**'
-source_files:
-    - package.json
-    - next.config.ts
-    - tsconfig.json
-    - demos/tsconfig.json
-    - demos/day1-mcp/package.json
-    - eslint.config.mjs
-    - postcss.config.mjs
 ---
 
 ## 1. 使用的系统/方法

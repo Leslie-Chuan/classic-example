@@ -1,16 +1,10 @@
 ---
 kind: configuration_system
 name: 基于硬编码常量与 Markdown 内容的轻量配置体系
+slug: configuration_system
 category: configuration_system
 scope:
     - '**'
-source_files:
-    - next.config.ts
-    - package.json
-    - src/lib/constants.ts
-    - src/lib/content.ts
-    - src/lib/markdown.ts
-    - demos/day1-mcp/package.json
 ---
 
 ## 1. 使用的系统/方法

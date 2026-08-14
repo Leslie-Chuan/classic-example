@@ -1,9 +1,8 @@
 schema_version: 1
-module_path: app
+module_path: aa8845c5-e566-4ff3-8596-f698448a2412/781a042b-518e-4ca7-8215-6f00e3091eb3
 title: AI 前端每日学习进度仪表盘
 scope:
     - src/
 source_files: []
 depends_on: []
-related_to:
-    - path: content
+related_to: []

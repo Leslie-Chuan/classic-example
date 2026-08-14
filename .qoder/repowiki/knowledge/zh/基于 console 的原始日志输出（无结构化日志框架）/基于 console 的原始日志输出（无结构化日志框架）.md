@@ -1,15 +1,10 @@
 ---
 kind: logging_system
 name: 基于 console 的原始日志输出（无结构化日志框架）
+slug: logging_system
 category: logging_system
 scope:
     - '**'
-source_files:
-    - demos/day2-mcp-server/frontend-helper-server.ts
-    - demos/day1-mcp/file-system-server.ts
-    - demos/day1-mcp/test-client.ts
-    - demos/day3-mcp-client/smart-client.ts
-    - package.json
 ---
 
 ## 1. 使用的系统/方法

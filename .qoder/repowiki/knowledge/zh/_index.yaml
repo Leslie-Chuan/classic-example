@@ -3,9 +3,48 @@ schema_version: 1
 locale: zh-CN
 branch: main
 nodes_managed: true
-exported_at: "2026-08-11T08:42:51Z"
+exported_at: "2026-08-13T08:10:47Z"
 modules:
     "":
+        dir_name: classic-example
+        title: classic-example
+        scope: []
+        source_files: []
+        children:
+            - 43b9198c-6201-400a-90a9-83e3931a68a7
+            - aa8845c5-e566-4ff3-8596-f698448a2412
+        depends_on: []
+        related_to: []
+    43b9198c-6201-400a-90a9-83e3931a68a7:
+        dir_name: MCP 智能客户端示例（Day 3）
+        title: MCP 智能客户端示例（Day 3）
+        scope:
+            - demos/day3-mcp-client/
+        source_files: []
+        children:
+            - 43b9198c-6201-400a-90a9-83e3931a68a7/f6e2ca44-25bc-45ea-aae2-a261d6f7e796
+        depends_on: []
+        related_to: []
+    43b9198c-6201-400a-90a9-83e3931a68a7/f6e2ca44-25bc-45ea-aae2-a261d6f7e796:
+        dir_name: MCP 渐进式教学 Demo 集合
+        title: MCP 渐进式教学 Demo 集合
+        scope:
+            - demos/
+        source_files: []
+        children:
+            - 43b9198c-6201-400a-90a9-83e3931a68a7/f6e2ca44-25bc-45ea-aae2-a261d6f7e796/82105d5e-0157-44a3-8939-59624c151cf0
+        depends_on: []
+        related_to: []
+    43b9198c-6201-400a-90a9-83e3931a68a7/f6e2ca44-25bc-45ea-aae2-a261d6f7e796/82105d5e-0157-44a3-8939-59624c151cf0:
+        dir_name: MCP 安全模型演示：无权限 Server 与四层防御 Client
+        title: MCP 安全模型演示：无权限 Server 与四层防御 Client
+        scope:
+            - demos/day5-security/
+        source_files: []
+        children: []
+        depends_on: []
+        related_to: []
+    aa8845c5-e566-4ff3-8596-f698448a2412:
         dir_name: MCP 协议学习实验室
         title: MCP 协议学习实验室
         scope:
@@ -19,22 +58,11 @@ modules:
             - postcss.config.mjs
         source_files: []
         children:
-            - app
-            - content
-            - demos
+            - aa8845c5-e566-4ff3-8596-f698448a2412/77fee85e-be00-40ec-b5f1-12a638622bd2
+            - aa8845c5-e566-4ff3-8596-f698448a2412/781a042b-518e-4ca7-8215-6f00e3091eb3
         depends_on: []
         related_to: []
-    app:
-        dir_name: AI 前端每日学习进度仪表盘
-        title: AI 前端每日学习进度仪表盘
-        scope:
-            - src/
-        source_files: []
-        children: []
-        depends_on: []
-        related_to:
-            - path: content
-    content:
+    aa8845c5-e566-4ff3-8596-f698448a2412/77fee85e-be00-40ec-b5f1-12a638622bd2:
         dir_name: MCP 协议每日学习笔记
         title: MCP 协议每日学习笔记
         scope:
@@ -42,36 +70,13 @@ modules:
         source_files: []
         children: []
         depends_on: []
-        related_to:
-            - path: app
-    demos:
-        dir_name: MCP 渐进式教学 Demo 集合
-        title: MCP 渐进式教学 Demo 集合
+        related_to: []
+    aa8845c5-e566-4ff3-8596-f698448a2412/781a042b-518e-4ca7-8215-6f00e3091eb3:
+        dir_name: AI 前端每日学习进度仪表盘
+        title: AI 前端每日学习进度仪表盘
         scope:
-            - demos/
+            - src/
         source_files: []
-        children:
-            - demos/day3_mcp_client
-            - demos/day5_security
+        children: []
         depends_on: []
         related_to: []
-    demos/day3_mcp_client:
-        dir_name: MCP 智能客户端示例（Day 3）
-        title: MCP 智能客户端示例（Day 3）
-        scope:
-            - demos/day3-mcp-client/
-        source_files: []
-        children: []
-        depends_on: []
-        related_to:
-            - path: demos/day5_security
-    demos/day5_security:
-        dir_name: MCP 安全模型演示：无权限 Server 与四层防御 Client
-        title: MCP 安全模型演示：无权限 Server 与四层防御 Client
-        scope:
-            - demos/day5-security/
-        source_files: []
-        children: []
-        depends_on: []
-        related_to:
-            - path: demos/day3_mcp_client

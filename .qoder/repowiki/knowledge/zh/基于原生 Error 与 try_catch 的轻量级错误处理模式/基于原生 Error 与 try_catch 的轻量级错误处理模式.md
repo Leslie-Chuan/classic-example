@@ -1,15 +1,10 @@
 ---
 kind: error_handling
 name: 基于原生 Error 与 try/catch 的轻量级错误处理模式
+slug: error_handling
 category: error_handling
 scope:
     - '**'
-source_files:
-    - src/hooks/useMCPTool.ts
-    - demos/day1-mcp/file-system-server.ts
-    - demos/day1-mcp/test-client.ts
-    - src/lib/markdown.ts
-    - src/components/MCPPlayground.tsx
 ---
 
 ## 1. 整体方法
